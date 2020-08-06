@@ -1,0 +1,20 @@
+{% extends 'home/base2.html' %}
+{% block title %}Clique.io{% endblock %}
+{% load static %}
+{% block content %}
+
+<h1 style="text-align: center; margin:2%;">Clique.io Webapp</h1>
+<br>
+<img src="{% static 'home/media/cliqueio.png'%}" style="width:50%; height:50%; margin-left:25%">
+
+<div style="width:90%;">
+        <h2 style="margin:2%;">Description</h2>
+        <h4 style="margin:2%; width:90%; margin-left:4%; line-height:1.3;">{{description}}</h4>
+        <h4 style="margin:2%; width:90%; margin-left:4%; line-height:1.3;">{{description2}}</h4>
+
+        <h3 style="margin:2%; width:90%; margin-left:4%; line-height:1.3;"><a href="https://github.com/hfbgk321/CLIQUE.IO">Clique.io Github</a></h3>
+        <h3 style="margin:2%; width:90%; margin-left:4%; line-height:1.3;"><a href="http://www.cliqueio.com/">Launched Website</a></h3>
+</div>
+
+
+{% endblock %}

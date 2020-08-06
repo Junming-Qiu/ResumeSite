@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+{%load static%}
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{%block title%}Content{%endblock%}</title>
+
+    <link href="{% static 'home/js/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{%static 'home/base.css'%}">
+</head>
+<body>
+    <div class="d-flex" id="wrapper">
+
+    <!-- Sidebar -->
+    <div class="bg-light border-right" id="sidebar-wrapper">
+      <div class="sidebar-heading"><a href="{% url 'home' %}">Junming's Visual Resume</a></div>
+        <div class="list-group list-group-flush">
+          <a onclick="scrollSkills();" class="list-group-item list-group-item-action bg-light">Skills</a>
+          <a onclick="scrollProjects();" class="list-group-item list-group-item-action bg-light">Projects</a>
+          <a onclick="scrollResume();" class="list-group-item list-group-item-action bg-light">Full Resume</a>
+
+        </div>
+      </div>
+    <!-- /#sidebar-wrapper -->
+    <!-- Page Content -->
+    <div id="page-content-wrapper">
+
+      <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+        <!--<button class="btn btn-primary" onclick="toggle()" id="menu-toggle"> <-- Contents</button>-->
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+            <li class="nav-item active">
+              <a class="nav-link" href="{% url 'contact' %}">Contact Me<span class="sr-only"></span></a>
+            </li>
+
+           <li class="nav-item active">
+              <a class="nav-link" href="https://github.com/Junming-Qiu/">GitHub<span class="sr-only"></span></a>
+           </li>
+
+          <a class="nav-link" href="https://www.linkedin.com/in/junming-qiu-32b343191/">LinkedIn<span class="sr-only"></span></a>
+          </ul>
+        </div>
+      </nav>
+
+      <div class="container-fluid">
+        {%block content%}
+        <h1 class="mt-4">Simple Sidebar</h1>
+        <p>The starting state of the menu will appear collapsed on smaller screens, and will appear non-collapsed on larger screens. When toggled using the button below, the menu will change.</p>
+        <p>Make sure to keep all page content within the <code>#page-content-wrapper</code>. The top navbar is optional, and just for demonstration. Just create an element with the <code>#menu-toggle</code> ID which will toggle the menu when clicked.</p>
+        {%endblock%}
+        </div>
+    </div>
+    <!-- /#page-content-wrapper -->
+
+</body>
+
+<script>
+    $("#menu-toggle").click(function(e) {
+      console.log('Success')
+      e.preventDefault();
+      $("#wrapper").toggleClass("toggled");Í
+    });
+
+    function toggle() {
+      var x = document.getElementById("sidebar-wrapper");
+      console.log('Success')
+      if (x.style.display === "none") {
+      x.style.display = "block";
+      } else {
+      x.style.display = "none";
+      }
+    }
+</script>
+
+<script src="{% static 'home/js/jquery/jquery.min.js' %}"></script>
+<script src="{% static 'home/js/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="{% static 'home/base.js' %}"></script>
+</html>

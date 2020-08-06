@@ -1,0 +1,25 @@
+{% extends 'home/base2.html' %}
+{% load static %}
+{% block title %}Apriltag Detection{% endblock %}
+{% block content %}
+
+<body>
+
+    <h1 style="text-align: center; margin:2%">Apriltag Detection</h1>
+    <br>
+    <div style="margin-left:10%">
+        <iframe width="1120" height="630" src="https://www.youtube.com/embed/y4RjYayK_0k" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <source src="{% static 'home/media/Aptag Demo.mp4' %}" type="video/mp4">
+        </video>
+    </div>
+
+    <div style="width:90%;">
+        <h2 style="margin:2%;">Description</h2>
+        <h4 style="margin:2%; width:90%; margin-left:4%; line-height:1.3;">{{description}}</h4>
+    </div>
+    <h2 style="margin:2%;">Code</h2>
+    <div style="width:80%; margin-left:10%;">
+    <script src="https://emgithub.com/embed.js?target=https%3A%2F%2Fgithub.com%2Fnyu-rdt%2FRMC20%2Fblob%2Fmaster%2Fnuc_code%2Fsrc%2Frdt_localization%2Fsrc%2Faptag_optimized.py&style=github&showBorder=on&showLineNumbers=on&showFileMeta=on"></script>
+    </div>
+</body>
+{% endblock %}

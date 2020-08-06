@@ -1,0 +1,40 @@
+{% extends 'home/base2.html' %}
+{% load static %}
+{% block title %}Contact Me{% endblock %}
+
+{% block content %}
+
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+
+<h1 style="text-align:center; margin:2%;">Contact Me</h1>
+<br>
+<div style="margin-left: 10%">
+<form action="{% url 'submit' %}" method="post">
+    {% csrf_token %}
+    <h3>Send me a message!</h3>
+    <br>
+    <label for="name">Name</label>
+    <br>
+    <input id="name" name="name" type="text" value="{{name}}">
+    <br><br>
+    <label for="email">Email</label>
+    <br>
+    <input id="email" name="email" type="text">
+    <br><br>
+    <label for="subject">Subject</label>
+    <br>
+    <input id="subject" name="subject" type="text" value="{{subject}}">
+    <br><br>
+    <h6>Description</h6>
+    <textarea id="description" name="description" rows="10" cols="50" value="{{description}}"></textarea>
+    <br>
+    <input type="submit" value="Submit" action="submit">
+</form>
+</div>
+{% endblock %}
