@@ -3,6 +3,8 @@ from django.http import HttpResponse
 from .models import messageModel
 from django.core.validators import validate_email
 from django.contrib import messages
+from .tictactoe import TicTacToe
+import random
 
 # Create your views here.
 def home(request):
@@ -59,6 +61,104 @@ def contact(request, data=None):
     else:
         return render(request, 'home/contact.html', {})
 
+
+def tictactoe_info(request):
+    description = "A tic tac toe game where you play against the computer!"
+
+    return render(request, 'home/tictactoeinfo.html', {'description': description})
+
+
+def tictactoe_game(request, row=-1, col=-1, state=None, user=-1):
+    message = ''
+    conversion = {1: "-",
+                  2: "X",
+                  3: "O"}
+
+    if state is None:
+        state = 111111111
+        modified_board = zip([
+                        zip(["-", "-", "-"], [0, 1, 2]),
+                        zip(["-", "-", "-"], [0, 1, 2]),
+                        zip(["-", "-", "-"], [0, 1, 2])],
+                            [0, 1, 2])
+
+        user = 2
+
+    else:
+        state = str(state)
+        location = 3 * row + col
+        state = state[:location] + str(user) + state[location + 1:]
+        board = [
+            [conversion[int(state[0])], conversion[int(state[1])], conversion[int(state[2])]],
+            [conversion[int(state[3])], conversion[int(state[4])], conversion[int(state[5])]],
+            [conversion[int(state[6])], conversion[int(state[7])], conversion[int(state[8])]]
+        ]
+        board[row][col] = conversion[user]
+
+        if user == 2:
+            bot = 3
+        elif user == 3:
+            bot = 2
+
+        first_turn = True
+        count = 0
+
+        for row_elem in board:
+            for col_elem in row_elem:
+                if col_elem == "-":
+                    count += 1
+                if col_elem == conversion[bot]:
+                    first_turn = False
+
+        if count > 0:
+            game = TicTacToe(board, first_turn)
+            res = game.algorithm(conversion[bot], board)[0]
+
+            winlose = game.check_complete(board)
+            print("a", winlose, board)
+
+            if winlose == 2:
+                message = "You Win!"
+                modified_board = zip([
+                    zip(board[0], [0, 1, 2]),
+                    zip(board[1], [0, 1, 2]),
+                    zip(board[2], [0, 1, 2])], [0, 1, 2])
+                return render(request, 'home/tictactoegame.html',
+                              {'board': modified_board, 'state': state, 'user': user,
+                               'message': message})
+
+            location = 3 * res[0] + res[1]
+            board[res[0]][res[1]] = conversion[bot]
+            winlose = game.check_complete(board)
+            print("b", winlose, board)
+
+            if winlose == 1:
+                message = "You lose :("
+                modified_board = zip([
+                    zip(board[0], [0, 1, 2]),
+                    zip(board[1], [0, 1, 2]),
+                    zip(board[2], [0, 1, 2])], [0, 1, 2])
+                return render(request, 'home/tictactoegame.html',
+                              {'board': modified_board, 'state': state, 'user': user,
+                               'message': message})
+
+            print(winlose, "lose or win")
+
+            state = state[:location] + str(bot) + state[location + 1:]
+            print(state, row, col, res)
+        else:
+            message = "Tie!"
+
+        modified_board = zip([
+            zip(board[0], [0, 1, 2]),
+            zip(board[1], [0, 1, 2]),
+            zip(board[2], [0, 1, 2])], [0, 1, 2])
+
+        state = int(state)
+
+    return render(request, 'home/tictactoegame.html', {'board': modified_board, 'state': state, 'user': user,
+                                                       'message': message})
+
 def save_contact_info(request):
     data = request.POST
 
@@ -77,3 +177,4 @@ def save_contact_info(request):
     except:
         messages.warning(request, 'Email is not valid')
         return contact(request, data)
+

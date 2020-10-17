@@ -1,0 +1,21 @@
+{% extends 'home/base2.html' %}
+{% block title %}Clique.io{% endblock %}
+{% load static %}
+{% block content %}
+
+<h1 style="text-align: center; margin:2%;">Tic Tac Toe Game</h1>
+<br>
+<img src="{% static 'home/media/tictactoe.jpg'%}" style="width:25%; height:25%; margin-left:38%">
+
+<div style="width:90%;">
+        <h2 style="margin:2%;">Description</h2>
+        <h4 style="margin:2%; width:90%; margin-left:4%; line-height:1.3;">{{description}} Play
+                <a href="{%url 'tictactoegame'%}">here</a>
+        </h4>
+
+
+
+</div>
+
+
+{% endblock %}

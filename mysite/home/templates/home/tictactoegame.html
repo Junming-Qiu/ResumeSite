@@ -1,0 +1,28 @@
+{% extends 'home/base2.html' %}
+{% block title %}Clique.io{% endblock %}
+{% load static %}
+{% block content %}
+
+<h1 style="text-align: center; margin:2%;">Tic Tac Toe Game</h1>
+
+<div style="text-align:center;">
+    {% for row, row_ind in board %}
+    <h1>
+        {% for elem, col_ind in row %}
+            {% if elem == "X" %}
+                |X|
+            {% elif elem == "O" %}
+                |O|
+            {% else %}
+                <a href="{% url 'tictactoegame' row_ind col_ind state user%}">|-|</a>
+            {% endif %}
+        {% endfor %}
+    </h1>
+
+    {% endfor %}
+</div>
+<div style="text-align:center;"><h4>{{message}}</h4></div>
+<div style="text-align:center;"><h4><a href="{% url 'tictactoegame' %}">Reset</a></h4></div>
+
+
+{% endblock %}

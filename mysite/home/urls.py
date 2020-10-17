@@ -7,5 +7,8 @@ urlpatterns = [
     path('apriltag_project/', views.apriltag, name='apriltag'),
     path('clique_io_project/', views.cliqueio, name='cliqueio'),
     path('contact_me/', views.contact, name='contact'),
-    path('submit/', views.save_contact_info, name='submit')
+    path('submit/', views.save_contact_info, name='submit'),
+    path('tictactoeinfo/', views.tictactoe_info, name='tictactoeinfo'),
+    path('tictactoegame/', views.tictactoe_game, name='tictactoegame'),
+    path('tictactoegame/<int:row>/<int:col>/<int:state>/<int:user>/', views.tictactoe_game, name='tictactoegame')
 ]
